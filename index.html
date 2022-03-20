@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
+    />
+    <title>pos-above-keyboard</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #button {
+        position: fixed;
+        width: 100%;
+        bottom: 10px;
+        background-color: rebeccapurple;
+        line-height: 40px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <input
+      type="text"
+      inputmode="decimal"
+      value="0.99"
+      id="input"
+      onblur="blurHandler()"
+    />
+    <div id="button">Button</div>
+
+    <script>
+      const button = document.getElementById("button");
+      const input = document.getElementById("input");
+      const height = window.visualViewport.height;
+      const viewport = window.visualViewport;
+
+      window.addEventListener("scroll", () => input.blur());
+      window.visualViewport.addEventListener("resize", resizeHandler);
+
+      function resizeHandler() {
+        button.style.bottom = `${height - viewport.height + 10}px`;
+      }
+
+      function blurHandler() {
+        button.style.bottom = "10px";
+      }
+    </script>
+  </body>
+</html>
