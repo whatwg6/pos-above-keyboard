@@ -33,18 +33,25 @@
       id="input"
       onblur="blurHandler()"
     />
-    <div id="button">Button</div>
+    <div id="button" onclick="inputBlur()">Button</div>
 
     <script>
       const button = document.getElementById("button");
       const input = document.getElementById("input");
-      const height = window.visualViewport.height;
+      let height = window.visualViewport.height;
       const viewport = window.visualViewport;
 
-      window.addEventListener("scroll", () => input.blur());
+      window.addEventListener("scroll", inputBlur);
       window.visualViewport.addEventListener("resize", resizeHandler);
 
+      function inputBlur() {
+        input.blur();
+      }
+
       function resizeHandler() {
+        if (!/iPhone|iPad|iPod/.test(window.navigator.userAgent)) {
+          height = viewport.height;
+        }
         button.style.bottom = `${height - viewport.height + 10}px`;
       }
 
